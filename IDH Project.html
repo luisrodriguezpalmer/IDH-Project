@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Leader Resource Hub</title>
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --surface: #ffffff;
+      --surface-2: #eef3ff;
+      --text: #1f2937;
+      --muted: #5b6472;
+      --primary: #2f5bea;
+      --primary-dark: #1f45bf;
+      --accent: #dbe5ff;
+      --border: #d9e2f1;
+      --shadow: 0 10px 30px rgba(31, 69, 191, 0.08);
+      --radius: 18px;
+      --max: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #f8faff 0%, #f4f7fc 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(92%, var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.88);
+      border-bottom: 1px solid rgba(217, 226, 241, 0.8);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 0.55rem 0.9rem;
+      border-radius: 999px;
+      color: var(--text);
+      background: transparent;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: var(--surface-2);
+      border-color: var(--border);
+      text-decoration: none;
+      color: var(--primary-dark);
+    }
+
+    .hero {
+      padding: 4rem 0 2rem;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top right, #e7efff 0%, #ffffff 52%);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary-dark);
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.2;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero p {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: 1.3rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.9rem 1.15rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(47, 91, 234, 0.12);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    section {
+      padding: 2rem 0 4rem;
+    }
+
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .section-intro {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1.5rem;
+      align-items: start;
+      margin-bottom: 1.8rem;
+    }
+
+    .section-intro p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .highlight-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1rem 1.1rem;
+    }
+
+    .highlight-box h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary-dark);
+    }
+
+    .highlight-box p {
+      margin: 0;
+      color: var(--text);
+      font-size: 0.96rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .info-card {
+      background: #fbfcff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.25rem;
+    }
+
+    .info-card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 0.8rem;
+      color: var(--primary-dark);
+    }
+
+    .info-card ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    .info-card li + li {
+      margin-top: 0.55rem;
+    }
+
+    .tips-list strong {
+      color: var(--text);
+    }
+
+    .resource-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 0.4rem;
+    }
+
+    .resource-link {
+      display: block;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem;
+      transition: 0.2s ease;
+      color: inherit;
+    }
+
+    .resource-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(47, 91, 234, 0.08);
+      text-decoration: none;
+      border-color: #bfd0ff;
+    }
+
+    .resource-link span {
+      display: block;
+    }
+
+    .resource-link .title {
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .resource-link .desc {
+      font-size: 0.93rem;
+      color: var(--muted);
+    }
+
+    .mini-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.4rem;
+    }
+
+    .step {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1rem;
+    }
+
+    .step-number {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: white;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .step h4 {
+      margin: 0 0 0.4rem;
+      color: var(--primary-dark);
+      font-size: 1rem;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .footer {
+      padding: 1.5rem 0 2.5rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      .section-intro,
+      .grid-2,
+      .resource-links,
+      .mini-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .section-card {
+        padding: 1.4rem;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+    .section-image {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand">Student Leader Resource Hub</div>
+      <nav class="nav-links">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#time-management" class="nav-link">Section 1</a>
+        <a href="#communication-teamwork" class="nav-link">Section 2</a>
+        <a href="#member-engagement" class="nav-link">Section 3</a>
+        <a href="#event-planning" class="nav-link">Section 4</a>
+        <a href="#skills-development" class="nav-link">Section 5</a>
+        <a href="#advice-from-leaders" class="nav-link">Section 6</a>
+        <a href="#wellbeing-balance" class="nav-link">Section 7</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Base / Home -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <span class="eyebrow">Built from student leader survey insights</span>
+          <h1>Resources for New Student Leaders</h1>
+          <p>
+            This website turns survey feedback from current student leaders into practical support
+            for incoming e-board members. Each section focuses on a challenge that showed up in the survey
+            and gives strategies, tools, and resources to help student leaders succeed.
+          </p>
+          <p>
+            Section 1 focuses on one of the biggest issues reported in the survey:
+            <strong>time management and balancing responsibilities.</strong>
+          </p> 
+          <img src="images/hero_blog_collaborative-learning_project-based-learning_iStock_1468800091_SolStock.webp" 
+          alt="Student leaders collaborating" 
+          class="section-image">
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 1 -->
+    <section id="time-management">
+      <div class="container">
+        <div class="section-card">
+          <div class="section-intro">
+            <div>
+              <span class="eyebrow">Section 1</span>
+              <h2>Managing Your Time as a Student Leader</h2>
+              <p>
+                Many student leaders reported that balancing academics, leadership responsibilities,
+                and other commitments can be difficult. This section gives simple ways to stay organized,
+                prioritize tasks, and avoid feeling overwhelmed.
+              </p>
+            </div>
+
+            <aside class="highlight-box">
+              <h3>Why this matters</h3>
+              <p>
+                Time management was one of the clearest needs shown in the survey, especially for leaders
+                balancing classes, organization work, and jobs or other responsibilities.
+              </p>
+            </aside>
+          </div>
+
+          <div class="grid-2">
+            <div class="info-card">
+              <h3>Practical Time Management Tips</h3>
+              <ul class="tips-list">
+                <li><strong>Use one calendar for everything.</strong> Keep classes, meetings, deadlines, and events in one place.</li>
+                <li><strong>Prioritize tasks daily.</strong> Start each day by identifying the most important tasks first.</li>
+                <li><strong>Break large projects into smaller steps.</strong> This makes events and deadlines feel more manageable.</li>
+                <li><strong>Set reminders early.</strong> Give yourself notice before meetings, forms, and event deadlines.</li>
+                <li><strong>Plan ahead for busy weeks.</strong> Midterms, finals, and major campus events can stack up quickly.</li>
+                <li><strong>Do not try to do everything alone.</strong> Delegate responsibilities to other board members when possible.</li>
+              </ul>
+            </div>
+
+            <div class="info-card">
+              <h3>Helpful Planning Tools</h3>
+              <div class="resource-links">
+                <a class="resource-link" href="https://calendar.google.com/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Google Calendar</span>
+                  <span class="desc">Use a shared or personal calendar to track meetings, deadlines, and events.</span>
+                </a>
+
+                <a class="resource-link" href="https://support.google.com/calendar/answer/2465776?hl=en" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Google Calendar Help</span>
+                  <span class="desc">Learn how to create reminders, repeat events, and organize your schedule.</span>
+                </a>
+
+                <a class="resource-link" href="https://www.notion.so/templates" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Notion Templates</span>
+                  <span class="desc">Find planning templates for task lists, deadlines, and organization workflows.</span>
+                </a>
+
+                <a class="resource-link" href="https://www.todoist.com/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Todoist</span>
+                  <span class="desc">Create daily to-do lists and sort tasks by urgency and deadline.</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini-steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <h4>List your responsibilities</h4>
+              <p>
+                Write down class deadlines, club tasks, meetings, work shifts, and personal responsibilities
+                in one system.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <h4>Choose your top priorities</h4>
+              <p>
+                Decide what must be done now, what can wait, and what can be shared with other members.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <h4>Review each week</h4>
+              <p>
+                Check what is coming up, adjust your schedule, and prepare early for busy periods.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- Section 2 -->
+    <section id="communication-teamwork">
+      <div class="container">
+        <div class="section-card">
+          <div class="section-intro">
+            <div>
+              <span class="eyebrow">Section 2</span>
+              <h2>Communication & Teamwork</h2>
+              <p>
+                Student leaders in the survey pointed to communication problems, unclear expectations,
+                and difficulty coordinating with other board members. Strong teamwork starts with clear roles,
+                regular check-ins, and honest communication.
+              </p>
+            </div>
+
+            <aside class="highlight-box">
+              <h3>Why this matters</h3>
+              <p>
+                Miscommunication can slow down planning, create stress, and make group projects harder than they need to be.
+                Setting systems early helps e-board members work together more effectively.
+              </p>
+            </aside>
+          </div>
+
+          <div class="grid-2">
+            <div class="info-card">
+              <h3>Ways to Strengthen Communication</h3>
+              <ul class="tips-list">
+                <li><strong>Set expectations early.</strong> Make sure every board member knows their role and responsibilities.</li>
+                <li><strong>Hold regular check-ins.</strong> Weekly or biweekly meetings keep everyone updated.</li>
+                <li><strong>Use one main communication platform.</strong> Avoid losing information across too many apps.</li>
+                <li><strong>Share updates clearly.</strong> Summarize deadlines, tasks, and decisions after meetings.</li>
+                <li><strong>Ask questions early.</strong> It is better to clarify a task than make the wrong assumption.</li>
+                <li><strong>Build trust within the team.</strong> Respect and accountability make collaboration smoother.</li>
+              </ul>
+            </div>
+
+            <div class="info-card">
+              <h3>Helpful Communication Tools</h3>
+              <div class="resource-links">
+                <a class="resource-link" href="https://slack.com/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Slack</span>
+                  <span class="desc">Organize team communication with channels for events, finances, and announcements.</span>
+                </a>
+
+                <a class="resource-link" href="https://discord.com/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Discord</span>
+                  <span class="desc">Useful for group communication, voice meetings, and quick coordination.</span>
+                </a>
+
+                <a class="resource-link" href="https://support.google.com/docs/answer/7068618?hl=en" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Google Docs Collaboration</span>
+                  <span class="desc">Learn how to share agendas, meeting notes, and planning documents with your team.</span>
+                </a>
+
+                <a class="resource-link" href="https://asana.com/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Asana</span>
+                  <span class="desc">Assign tasks, track progress, and make responsibilities visible to the entire board.</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini-steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <h4>Define roles</h4>
+              <p>
+                Give each officer specific responsibilities so tasks do not overlap or get ignored.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <h4>Meet consistently</h4>
+              <p>
+                Use short, regular meetings to review progress, solve problems, and prepare for upcoming events.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <h4>Document decisions</h4>
+              <p>
+                Keep notes on deadlines, assignments, and next steps so everyone leaves with the same understanding.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section id="member-engagement">
+      <div class="container">
+        <div class="section-card">
+          <div class="section-intro">
+            <div>
+              <span class="eyebrow">Section 3</span>
+              <h2>How to Increase Member Engagement</h2>
+              <p>
+                Another challenge highlighted in the survey was low member participation.
+                Even strong organizations can struggle if members do not attend meetings,
+                respond to announcements, or stay involved throughout the semester.
+              </p>
+            </div>
+
+            <aside class="highlight-box">
+              <h3>Why this matters</h3>
+              <p>
+                Student organizations are stronger when members feel included, interested, and connected to the group’s goals.
+                Engagement helps events succeed and builds a stronger campus community.
+              </p>
+            </aside>
+          </div>
+
+          <div class="grid-2">
+            <div class="info-card">
+              <h3>Ways to Boost Participation</h3>
+              <ul class="tips-list">
+                <li><strong>Make meetings interactive.</strong> Include discussion, activities, or collaboration instead of only announcements.</li>
+                <li><strong>Promote events consistently.</strong> Use flyers, email, and social media to remind members what is happening.</li>
+                <li><strong>Create a welcoming environment.</strong> New members are more likely to return when they feel included.</li>
+                <li><strong>Offer incentives.</strong> Food, networking, giveaways, or certificates can encourage turnout.</li>
+                <li><strong>Partner with other clubs.</strong> Collaborative events can bring in new audiences.</li>
+                <li><strong>Ask members what they want.</strong> Feedback helps leaders plan events that students will actually attend.</li>
+              </ul>
+            </div>
+
+            <div class="info-card">
+              <h3>Helpful Engagement Resources</h3>
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Canva</span>
+                  <span class="desc">Create flyers, Instagram posts, and event graphics to promote your organization.</span>
+                </a>
+
+                <a class="resource-link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Instagram</span>
+                  <span class="desc">Use social media to share reminders, highlight members, and advertise events.</span>
+                </a>
+
+                <a class="resource-link" href="https://forms.google.com/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Google Forms</span>
+                  <span class="desc">Collect feedback, event ideas, and attendance interest from members.</span>
+                </a>
+
+                <a class="resource-link" href="https://www.signupgenius.com/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">SignUpGenius</span>
+                  <span class="desc">Organize sign-ups for volunteering, event help, and member participation.</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini-steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <h4>Promote early</h4>
+              <p>
+                Start advertising before the event and continue with reminders as the date gets closer.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <h4>Make it worth attending</h4>
+              <p>
+                Plan events that are useful, social, or memorable so members feel their time is valued.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <h4>Follow up afterward</h4>
+              <p>
+                Share photos, thank attendees, and ask for feedback to keep people connected after the event ends.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- Section 4 -->
+    <section id="event-planning">
+      <div class="container">
+        <div class="section-card">
+          <div class="section-intro">
+            <div>
+              <span class="eyebrow">Section 4</span>
+              <h2>How to Plan a Successful Event</h2>
+              <p>
+                Event planning was another challenge mentioned in the survey. Organizing a successful
+                event takes clear goals, early preparation, teamwork, and strong promotion. This section
+                breaks the process into simple steps that new leaders can follow.
+              </p>
+            </div>
+
+            <aside class="highlight-box">
+              <h3>Why this matters</h3>
+              <p>
+                Well-planned events can increase organization visibility, improve member participation,
+                and help student leaders create meaningful experiences on campus.
+              </p>
+            </aside>
+          </div>
+
+          <div class="grid-2">
+            <div class="info-card">
+              <h3>Event Planning Tips</h3>
+              <ul class="tips-list">
+                <li><strong>Start with a clear goal.</strong> Decide whether the event is social, educational, professional, or community-based.</li>
+                <li><strong>Plan early.</strong> Give yourself enough time to reserve space, request funding, and promote the event.</li>
+                <li><strong>Assign roles.</strong> Split responsibilities such as promotion, budgeting, setup, and communication.</li>
+                <li><strong>Track deadlines.</strong> Keep all approval dates, forms, and preparation tasks in one place.</li>
+                <li><strong>Promote more than once.</strong> Students may need several reminders before they decide to attend.</li>
+                <li><strong>Evaluate afterward.</strong> Reflect on what worked well and what should be improved next time.</li>
+              </ul>
+            </div>
+
+            <div class="info-card">
+              <h3>Helpful Event Resources</h3>
+              <div class="resource-links">
+                <a class="resource-link" href="https://trello.com/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Trello</span>
+                  <span class="desc">Organize event tasks, deadlines, and responsibilities with a visual planning board.</span>
+                </a>
+
+                <a class="resource-link" href="https://www.eventbrite.com/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Eventbrite</span>
+                  <span class="desc">Create event pages, manage registration, and track attendance for larger programs.</span>
+                </a>
+
+                <a class="resource-link" href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Canva</span>
+                  <span class="desc">Design flyers, social media posts, and event graphics to improve promotion.</span>
+                </a>
+
+                <a class="resource-link" href="https://docs.google.com/spreadsheets/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Google Sheets</span>
+                  <span class="desc">Track budgets, supply lists, attendance estimates, and planning timelines.</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini-steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <h4>Set the goal</h4>
+              <p>
+                Define the purpose of the event and what outcome your organization wants to achieve.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <h4>Organize the details</h4>
+              <p>
+                Confirm the location, budget, responsibilities, and promotional plan before the event week.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <h4>Review the results</h4>
+              <p>
+                After the event, gather feedback and note improvements for the next program.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5 -->
+    <section id="skills-development">
+      <div class="container">
+        <div class="section-card">
+          <div class="section-intro">
+            <div>
+              <span class="eyebrow">Section 5</span>
+              <h2>Skills You Will Gain as a Student Leader</h2>
+              <p>
+                The survey did not only highlight challenges. It also showed that student leaders gain
+                valuable skills through their roles. These experiences help students grow personally,
+                academically, and professionally.
+              </p>
+            </div>
+
+            <aside class="highlight-box">
+              <h3>Why this matters</h3>
+              <p>
+                Leadership positions build real-world abilities that are useful in internships, jobs,
+                group projects, and future professional roles.
+              </p>
+            </aside>
+          </div>
+
+          <div class="grid-2">
+            <div class="info-card">
+              <h3>Common Skills Leaders Develop</h3>
+              <ul class="tips-list">
+                <li><strong>Communication.</strong> Speaking clearly, writing updates, and leading discussions.</li>
+                <li><strong>Teamwork.</strong> Collaborating with other officers and working toward shared goals.</li>
+                <li><strong>Organization.</strong> Managing deadlines, documents, and multiple responsibilities.</li>
+                <li><strong>Problem-solving.</strong> Responding to unexpected issues during planning and events.</li>
+                <li><strong>Time management.</strong> Balancing leadership with academics, work, and personal life.</li>
+                <li><strong>Confidence.</strong> Taking initiative and making decisions in front of others.</li>
+              </ul>
+            </div>
+
+            <div class="info-card">
+              <h3>Professional Growth Resources</h3>
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">LinkedIn</span>
+                  <span class="desc">Showcase your leadership experience and connect it to future career opportunities.</span>
+                </a>
+
+                <a class="resource-link" href="https://www.coursera.org/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Coursera</span>
+                  <span class="desc">Explore courses on communication, leadership, and project management.</span>
+                </a>
+
+                <a class="resource-link" href="https://www.indeed.com/career-advice/resumes-cover-letters/leadership-skills" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Leadership Skills Guide</span>
+                  <span class="desc">Learn how to describe leadership skills on resumes and in interviews.</span>
+                </a>
+
+                <a class="resource-link" href="https://www.themuse.com/advice/transferable-skills" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Transferable Skills Resource</span>
+                  <span class="desc">Understand how leadership experiences translate into professional strengths.</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini-steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <h4>Recognize your growth</h4>
+              <p>
+                Pay attention to how leadership responsibilities help you improve over time.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <h4>Keep examples</h4>
+              <p>
+                Save examples of events, teamwork, and projects you can later use in interviews and resumes.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <h4>Apply the skills elsewhere</h4>
+              <p>
+                Use what you learn in leadership roles in class projects, internships, and future jobs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6 -->
+    <section id="advice-from-leaders">
+      <div class="container">
+        <div class="section-card">
+          <div class="section-intro">
+            <div>
+              <span class="eyebrow">Section 6</span>
+              <h2>Advice from Current Student Leaders</h2>
+              <p>
+                One of the most valuable parts of the survey was the advice shared by current e-board members.
+                Their experiences can help incoming leaders prepare for challenges and approach their roles
+                with a stronger mindset.
+              </p>
+            </div>
+
+            <aside class="highlight-box">
+              <h3>Why this matters</h3>
+              <p>
+                Real advice from current leaders makes this website more practical. It connects survey findings
+                directly to the voices of students who have already done the work.
+              </p>
+            </aside>
+          </div>
+
+          <div class="grid-2">
+            <div class="info-card">
+              <h3>Key Advice Themes</h3>
+              <ul class="tips-list">
+                <li><strong>Leadership is a responsibility, not just a title.</strong> Take your role seriously and stay committed.</li>
+                <li><strong>Communicate clearly.</strong> Set expectations early and keep your team informed.</li>
+                <li><strong>Manage your time wisely.</strong> Do not let tasks pile up.</li>
+                <li><strong>Trust your team.</strong> Delegating helps the organization function better.</li>
+                <li><strong>Stay open to learning.</strong> You will improve through experience, mistakes, and feedback.</li>
+                <li><strong>Be consistent.</strong> Strong leadership often comes from small habits done regularly.</li>
+              </ul>
+            </div>
+
+            <div class="info-card">
+              <h3>Leadership Inspiration & Support</h3>
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.ted.com/topics/leadership" target="_blank" rel="noopener noreferrer">
+                  <span class="title">TED Talks on Leadership</span>
+                  <span class="desc">Watch short talks on motivation, teamwork, communication, and responsibility.</span>
+                </a>
+
+                <a class="resource-link" href="https://hbr.org/topic/leadership" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Harvard Business Review: Leadership</span>
+                  <span class="desc">Read accessible articles about leadership habits, communication, and management.</span>
+                </a>
+
+                <a class="resource-link" href="https://www.mindtools.com/pages/main/newMN_TMM.htm" target="_blank" rel="noopener noreferrer">
+                  <span class="title">MindTools: Time Management</span>
+                  <span class="desc">Explore strategies that support leadership, planning, and productivity.</span>
+                </a>
+
+                <a class="resource-link" href="https://www.forbes.com/sites/forbescoachescouncil/channel/leadership/" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Forbes Leadership Articles</span>
+                  <span class="desc">Browse leadership advice focused on communication, teamwork, and professional growth.</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini-steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <h4>Take initiative</h4>
+              <p>
+                Do not wait for every answer. Good leaders often learn by stepping forward and trying.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <h4>Stay accountable</h4>
+              <p>
+                Follow through on commitments and be someone your team can rely on.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <h4>Learn from experience</h4>
+              <p>
+                Every event, mistake, and success gives you information that can make you a stronger leader.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7 -->
+    <section id="wellbeing-balance">
+      <div class="container">
+        <div class="section-card">
+          <div class="section-intro">
+            <div>
+              <span class="eyebrow">Section 7</span>
+              <h2>Well-Being and Avoiding Burnout</h2>
+              <p>
+                Balancing leadership, academics, work, and personal responsibilities can be stressful.
+                This section focuses on maintaining well-being so student leaders can stay effective
+                without becoming overwhelmed.
+              </p>
+            </div>
+
+            <aside class="highlight-box">
+              <h3>Why this matters</h3>
+              <p>
+                Student leaders are often highly involved, but overcommitting can lead to stress and burnout.
+                Building healthy habits helps leaders stay productive and maintain balance.
+              </p>
+            </aside>
+          </div>
+
+          <div class="grid-2">
+            <div class="info-card">
+              <h3>Ways to Protect Your Well-Being</h3>
+              <ul class="tips-list">
+                <li><strong>Do not overcommit.</strong> Be realistic about what you can handle each semester.</li>
+                <li><strong>Set boundaries.</strong> Protect time for studying, rest, and personal responsibilities.</li>
+                <li><strong>Ask for help when needed.</strong> Leadership should be shared, not carried alone.</li>
+                <li><strong>Take breaks.</strong> Rest improves focus, energy, and decision-making.</li>
+                <li><strong>Recognize stress early.</strong> Pay attention to signs of exhaustion or falling behind.</li>
+                <li><strong>Focus on balance.</strong> Success in leadership should not come at the expense of your health.</li>
+              </ul>
+            </div>
+
+            <div class="info-card">
+              <h3>Helpful Wellness Resources</h3>
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.nami.org/Your-Journey/Teens-Young-Adults/Young-Adults" target="_blank" rel="noopener noreferrer">
+                  <span class="title">NAMI Young Adults</span>
+                  <span class="desc">Mental health support and wellness information relevant to college-aged students.</span>
+                </a>
+
+                <a class="resource-link" href="https://www.helpguide.org/articles/stress/stress-management.htm" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Stress Management Guide</span>
+                  <span class="desc">Learn simple techniques for coping with stress and staying balanced.</span>
+                </a>
+
+                <a class="resource-link" href="https://students.googleblog.com/2022/09/digital-wellbeing-for-students.html" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Digital Wellbeing for Students</span>
+                  <span class="desc">Tips for managing screen time, focus, and online responsibilities.</span>
+                </a>
+
+                <a class="resource-link" href="https://www.mhanational.org/college-students" target="_blank" rel="noopener noreferrer">
+                  <span class="title">Mental Health America: College Students</span>
+                  <span class="desc">Resources focused on student stress, self-care, and mental health awareness.</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini-steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <h4>Know your limits</h4>
+              <p>
+                Be honest about your workload and avoid saying yes to every responsibility.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <h4>Make space for rest</h4>
+              <p>
+                Protect time for sleep, breaks, and activities that help you recharge.
+              </p>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <h4>Reach out early</h4>
+              <p>
+                Talk to teammates, advisors, or campus resources before stress becomes unmanageable.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      Created to support incoming student leaders using insights from a student leadership survey.
+    </div>
+  </footer>
+
+  <script>
+    const navLinks = document.querySelectorAll(".nav-link");
+    const sections = document.querySelectorAll("section[id]");
+    const themeToggle = document.getElementById("themeToggle");
+
+    function updateActiveNav() {
+      let current = "";
+      sections.forEach(section => {
+        const top = window.scrollY;
+        const offset = section.offsetTop - 120;
+        const height = section.offsetHeight;
+        if (top >= offset && top < offset + height) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${current}`) {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    updateActiveNav();
+    window.addEventListener("scroll", updateActiveNav);
+
+    themeToggle.addEventListener("click", () => {
+      const root = document.documentElement;
+      const darkMode = root.dataset.theme === "dark";
+
+      if (!darkMode) {
+        root.dataset.theme = "dark";
+        root.style.setProperty("--bg", "#0f172a");
+        root.style.setProperty("--surface", "#111827");
+        root.style.setProperty("--surface-2", "#172036");
+        root.style.setProperty("--text", "#e5eefc");
+        root.style.setProperty("--muted", "#b8c3d9");
+        root.style.setProperty("--primary", "#7aa2ff");
+        root.style.setProperty("--primary-dark", "#bfd1ff");
+        root.style.setProperty("--accent", "#1c2a4b");
+        root.style.setProperty("--border", "#2a3b63");
+      } else {
+        root.dataset.theme = "light";
+        root.style.setProperty("--bg", "#f6f8fc");
+        root.style.setProperty("--surface", "#ffffff");
+        root.style.setProperty("--surface-2", "#eef3ff");
+        root.style.setProperty("--text", "#1f2937");
+        root.style.setProperty("--muted", "#5b6472");
+        root.style.setProperty("--primary", "#2f5bea");
+        root.style.setProperty("--primary-dark", "#1f45bf");
+        root.style.setProperty("--accent", "#dbe5ff");
+        root.style.setProperty("--border", "#d9e2f1");
+      }
+    });
+  </script>
+</body>
+</html>
